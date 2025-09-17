@@ -1,3 +1,115 @@
-.body{
-    background-color: rgb(13, 65, 47);
+* {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    font-family: "Roboto", sans-serif;
+    background-color: #a5b1c2;
+    margin: 30px 80px;
+    height: 100vh;
+}
+
+.wrapper {
+    perspective: 1000px; /* Adjusted perspective */
+    display: flex; /* Added for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Ensure full height */
+}
+
+.card {
+    width: 360px;
+    height: 530px;
+    transform-style: preserve-3d;
+    transition: transform 1s; /* Specify the property being transitioned */
+    cursor: pointer;
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+                -5px -5px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+}
+
+.card:hover {
+    transform: rotateY(180deg); /* Corrected syntax */
+}
+
+.front-page,
+.back-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+}
+
+.front-page {
+    background-image: url(image.jpg);
+    background-size: cover;
+}
+
+.card-info {
+    position: absolute;
+    bottom: 50px;
+    left: 45px;
+    color: #630c0c;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); /* Corrected syntax */
+    text-align: center;
+}
+
+.card-title {
+    font-size: 2rem; /* Corrected property */
+    font-weight: bold;
+}
+
+.card-subtitle {
+    font-size: 1.2rem;
+    margin-top: 5px;
+    color: #0fbcf9;
+}
+
+.back-page {
+    background-color: #1e272e;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg); /* Corrected syntax */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 1s; /* Added transition */
+}
+
+.card-content {
+    text-align: center;
+    padding: 20px;
+    max-width: 300px;
+}
+
+.card-content h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.card-button {
+    background-color: #0fbcf9;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: transparent;
+    color: #0fbcf9;
+    border: 1px solid #0fbcf9;
 }
