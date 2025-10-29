@@ -199,9 +199,9 @@ def delete_student():
                del students[i]
                print("🗑 Student deleted.")
             else:
-                print("❎ Deletion cancelled.")
+                print("Deletion cancelled.")
             return
-    print("❌ No student found with that registration number.")
+    print("No student found with that registration number.")
 
 
 #Main loop
@@ -221,7 +221,7 @@ if admin_login():
     elif choice == '5':
         delete_student()
     elif choice == '6':
-        print("👋 Exiting program. Goodbye!")
+        print("Exiting program. Goodbye!")
         break
     else:
         exit()
