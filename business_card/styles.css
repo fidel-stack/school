@@ -1,0 +1,34 @@
+    body{
+background-color: rosybrown;
+font-family: Arial, sans-serif;
+}
+.business-card{
+  padding: 20px;
+  margin-top: 100px;
+  background-color: grey;
+  width: 300px;
+  text-align: center;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+.profile-image{
+  max-width: 100%;
+}
+p{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+a{
+  color: black;
+  text-decoration: none
+}
+a:hover{
+  color: brown;
+}
+hr{
+  background-color: rosybrown;
+  height: 2px;
+  border-color: rosybrown
+}
