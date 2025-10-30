@@ -1,0 +1,44 @@
+body{
+background-color: rgb(231, 223, 223);
+margin: 30px;
+font-family: Arial;
+}
+h1{
+  text-align: center;
+  font-family: Impact;
+}
+.list{
+  padding: 10px;
+  background-color: white;
+  margin-right: auto;
+  margin-left: auto;
+  width: 450px;
+  height: 600px;
+  border-radius: 10px; 
+  font-size: 20px; 
+}
+.item{
+  background-color: lightgreen;
+  margin: 30px;
+  border-radius: 5px;
+  max-width: 300px;
+  min-height: 70px;
+  padding-top: 30px;
+
+}
+a{
+  color: grey;
+  text-decoration: none;
+}
+a:hover{
+  color: black
+}
+a:visited{
+  color: purple;
+}
+a:focus{
+  outline: 2px solid green;
+}
+a:active{
+  color: red;
+}
