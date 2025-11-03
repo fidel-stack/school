@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Application Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <form>
+            <label for="name">Your Full Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <label for="position">Desired Position</label>
+            <select id="position" required>
+                <option value="">Choose a position</option>
+                <option value="frontend">Frontend Engineer</option>
+                <option value="backend">Backend Engineer</option>
+                <option value="designer">UI/UX Designer</option>
+                <option value="analyst">Data Analyst</option>
+            </select>
+
+            <fieldset class="radio-group">
+                <legend>Availability Type</legend>
+                <div>
+                    <input type="radio" id="full" name="availability" value="full-time">
+                    <label for="full">Full-Time</label>
+                </div>
+                <div>
+                    <input type="radio" id="part" name="availability" value="part-time">
+                    <label for="part">Part-Time</label>
+                </div>
+                <div>
+                    <input type="radio" id="contract" name="availability" value="contract">
+                    <label for="contract">Contract</label>
+                </div>
+            </fieldset>
+
+            <label for="message">Additional Message</label>
+            <textarea id="message" placeholder="Tell us more about yourself" required></textarea>
+
+            <button type="submit">Apply Now</button>
+        </form>
+    </div>
+</body>
+</html>
