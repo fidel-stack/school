@@ -1,0 +1,284 @@
+/* Reset default browser spacing and make sizing predictable */
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Set base font size (62.5% = 10px, so 1rem = 10px) */
+html {
+  font-size: 62.5%;
+}
+
+/* General body styles */
+body {
+  font-family: 'Baskervville', serif;
+  color: linen;
+  background-color: rgb(20, 30, 40);
+}
+
+/* Headings use different fonts */
+h1 {
+  font-family: 'Anton', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Remove underline from links */
+a {
+  text-decoration: none;
+  color: linen;
+}
+
+/* =======================
+   MAIN GRID LAYOUT
+   ======================= */
+main {
+  display: grid;
+
+  /*
+    Creates THREE columns:
+    1st column: left spacing (min 2rem, can grow)
+    2nd column: main content area (min-content to max 94rem)
+    3rd column: right spacing (min 2rem, can grow)
+
+    This keeps content centered with space on both sides
+  */
+  grid-template-columns:
+    minmax(2rem, 1fr)
+    minmax(min-content, 94rem)
+    minmax(2rem, 1fr);
+
+  /* Space between rows */
+  row-gap: 3rem;
+}
+
+/* Make images responsive */
+img {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Horizontal rule styling */
+hr {
+  margin: 1.5rem 0;
+  border: 1px solid rgba(120, 120, 120, 0.6);
+}
+
+/* =======================
+   HEADING SECTION GRID
+   ======================= */
+.heading {
+  /* Place heading in the CENTER column of main grid */
+  grid-column: 2 / 3;
+
+  display: grid;
+
+  /* Two equal columns inside the heading */
+  grid-template-columns: repeat(2, 1fr);
+
+  /* Vertical spacing between rows */
+  row-gap: 1.5rem;
+}
+
+/* Main article text */
+.text {
+  /* Keep text centered like heading */
+  grid-column: 2 / 3;
+
+  font-size: 1.8rem;
+  letter-spacing: 0.6px;
+
+  /* Creates newspaper-style columns */
+  column-width: 25rem;
+
+  text-align: justify;
+}
+
+/* =======================
+   HERO SECTION
+   ======================= */
+.hero {
+  /* Span across ALL columns of the main grid */
+  grid-column: 1 / -1;
+
+  position: relative;
+}
+
+.hero-title {
+  text-align: center;
+  color: orangered;
+  font-size: 8rem;
+}
+
+.hero-subtitle {
+  font-size: 2.4rem;
+  color: orangered;
+  text-align: center;
+}
+
+/* Author section */
+.author {
+  font-size: 2rem;
+  font-family: "Raleway", sans-serif;
+}
+
+.author-name a:hover {
+  background-color: #306203;
+}
+
+.publish-date {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* =======================
+   SOCIAL ICONS GRID
+   ======================= */
+.social-icons {
+  display: grid;
+  font-size: 3rem;
+
+  /* 5 equal columns */
+  grid-template-columns: repeat(5, 1fr);
+
+  /*
+    New items flow horizontally instead of vertically
+  */
+  grid-auto-flow: column;
+
+  /* Auto-created columns will also be equal width */
+  grid-auto-columns: 1fr;
+
+  align-items: center;
+}
+
+/* Styling the first letter of first paragraph */
+.first-paragraph::first-letter {
+  font-size: 6rem;
+  color: orangered;
+  float: left;
+  margin-right: 1rem;
+}
+
+/* Quote styling */
+.quote {
+  color: #00beef;
+  font-size: 2.4rem;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+}
+
+/* Add quotation marks automatically */
+.quote::before {
+  content: '" ';
+}
+
+.quote::after {
+  content: ' "';
+}
+
+/* =======================
+   TEXT + IMAGE GRID
+   ======================= */
+.text-with-images {
+  display: grid;
+
+  /* Two columns: text (1fr) and image (2fr) */
+  grid-template-columns: 1fr 2fr;
+
+  /* Horizontal spacing between columns */
+  column-gap: 3rem;
+
+  margin-bottom: 3rem;
+}
+
+/* Remove bullets from lists */
+.lists {
+  list-style-type: none;
+  margin-top: 2rem;
+}
+
+.lists li {
+  margin-bottom: 1.5rem;
+}
+
+.list-title, .list-subtitle {
+  color: #00beef;
+}
+
+/* =======================
+   IMAGE GRID LAYOUT
+   ======================= */
+.image-wrapper {
+  display: grid;
+
+  /*
+    Two columns:
+    - First column is wider (2fr)
+    - Second column is smaller (1fr)
+  */
+  grid-template-columns: 2fr 1fr;
+
+  /* Three rows sized only by content height */
+  grid-template-rows: repeat(3, min-content);
+
+  /* Space between grid items */
+  gap: 2rem;
+
+  /* Center items both horizontally and vertically */
+  place-items: center;
+}
+
+/* Make image 1 and 3 span across both columns */
+.image-1,
+.image-3 {
+  grid-column: 1 / -1;
+}
+
+/* =======================
+   RESPONSIVE DESIGN
+   ======================= */
+@media only screen and (max-width: 720px) {
+  /* Stack images into one column */
+  .image-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  /* Stack text and image vertically */
+  .text-with-images {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .hero-title {
+    font-size: 6rem;
+  }
+  
+  .hero-subtitle,
+  .author,
+  .quote,
+  .list-title {
+    font-size: 1.8rem;
+  }
+  
+  .social-icons {
+    font-size: 2rem;
+  }
+
+  .text {
+    font-size: 1.6rem;
+  } 
+}
+
+@media only screen and (max-width: 420px){
+  .hero-title{
+    font-size: 4.5rem;
+  }
+}
