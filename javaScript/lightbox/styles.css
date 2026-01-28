@@ -1,0 +1,74 @@
+body{
+  margin: 100px, 0, 200px, 0;  background-color: #f4f4f4;
+}
+
+h2{
+  text-align: center;
+  background-color: #d8e1e2;
+}
+
+.gallery{
+  display: block;
+  margin: auto;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+.gallery-item{
+  width: 200px;
+  height: 250px; border-radius: 5px;
+}
+
+
+.lightbox{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: none;
+ background-color: rgba(0,0,0,0.8);
+ top: 0;
+ left: 0;
+ text-align: center;
+ align-items: center;
+}
+.lightbox img{
+  max-width: 90vw;
+  min-height: 90vh;
+  object-fit: contain;
+  margin: 20px;
+}
+#lightbox-image{
+  width:  auto;
+  height: auto;
+}
+
+.gallery-item:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+#close-btn{
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 25px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #ffffff;
+}
+.lightbox img {
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
