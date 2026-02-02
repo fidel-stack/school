@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  img-src 'self' https: data:;
+  style-src 'self' https://cdnjs.cloudflare.com 'unsafe-inline';
+  script-src 'self' https://cdnjs.cloudflare.com;
+  font-src 'self' https://cdnjs.cloudflare.com;
+  connect-src 'self' https://formspree.io;
+  form-action 'self' https://formspree.io;
+">
+
+
+    <link href="./styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>ShadowHack Tech</title>
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="nav container">
+            <img src="shadowLogo.png" alt="ShadowHack logo" class="logo">
+
+            <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+                <a href="#contact" class="nav-cta">Contact</a>
+            </div>
+        </nav>
+
+    </header>
+    <main>
+        <div id="home" class="hero container">
+            <h1>Build a Digital Presence That Actually Works</h1>
+            <h2>Web Design, Posters and visual content build to look good and do something useful</h2>
+            <p>We design websites and digital content that help brands stand out, connect with audiences, and grow
+                online. Clean design. Clear messaging. Real results.</p>
+            <br>
+            <a href="#contact" class="primary-btn">Start a project</a>
+            <br>
+            <section id="services" class="services container">
+                <h2>What We Do</h2>
+
+                <div class="services-grid">
+                    <div class="flip-card" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <h3>Web Design & Development</h3>
+                                <p>Fast, responsive websites</p>
+                            </div>
+                            <div class="flip-back">
+                                <p>
+                                    Custom-built websites focused on performance, clarity,
+                                    and converting visitors into customers.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <h3>Digital Content Creation</h3>
+                                <p>Visuals that connect</p>
+                            </div>
+                            <div class="flip-back">
+                                <p>
+                                    Branded content designed to engage your audience
+                                    across web and social platforms.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flip-card" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <h3>Branding & Visual Identity</h3>
+                                <p>Recognizable, consistent brands</p>
+                            </div>
+                            <div class="flip-back">
+                                <p>
+                                    Logos, color systems, and design language that make
+                                    your brand memorable and trustworthy.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div id="about" class="about container">
+                <h1>About us</h1>
+                <h2>Creative Minds. Strategic Thinking.</h2>
+                <p>We’re a digital service studio helping businesses build a strong online presence through thoughtful
+                    web design and engaging digital content.</p>
+                <p>Our approach is simple: understand your goals, design with intention, and create content that
+                    converts visitors into customers. Whether you’re starting fresh or leveling up, we’re here to help
+                    you show up confidently online.</p>
+
+            </div>
+            <div id="contact" class="contact container">
+                <h1>Ready to Elevate Your Brand?</h1>
+
+                <p class="contact-subtext">Tell us about your project and we’ll get back to you shortly.</p>
+                <form id="contact-form" method="post" action="https://formspree.io/f/xeorodbg">
+                    <input type="text" name="company" tabindex="-1" autocomplete="off" hidden>
+
+                    <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
+                    <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
+                    <textarea name="message" placeholder="Your Message" required autocomplete="off"></textarea>
+                    <button type="submit" class="primary-btn" id="sendBtn">Send</button>
+                    <p class="form-note">
+                        We respect your privacy. Your information will only be used to contact you.
+                    </p>
+                </form>
+                <div id="popup" class="popup">
+                    <div class="popup-content">
+                        <p>Thank you for your message!</p>
+                        <button id="close-btn">Close</button>
+                    </div>
+                </div>
+
+            </div>
+    </main>
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="https://wa.me/+254758643068" target="_blank" aria-label="WhatsApp" title="WhatsApp us"><i
+                    class="fab fa-whatsapp"></i></a>
+            <a href="mailto:shadowhacktech@gmail.com?subject=Contact%20from%20Website" title="Email us"
+                aria-label="Send email">
+                <i class="fa fa-envelope" aria-hidden="true"></i></a>
+
+        </div>
+        <p>&copy; 2026 ShadowHack. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
