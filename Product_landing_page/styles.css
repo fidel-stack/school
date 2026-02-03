@@ -5,6 +5,8 @@
 }
 body{
     padding-top: 100px;
+    background-color: #ffffff;
+    overflow: scroll;
 }
 #nav-bar{
     margin: 0;

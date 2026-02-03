@@ -1,0 +1,31 @@
+body{
+  background-color: #a2d3fa;
+  font-family: Monospace;
+}
+.text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h2{
+  background-color: #f6faa2;
+  padding: 8px;
+}
+
+#text-input{
+  height: 100px;
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+}
+
+#char-count.limit{
+  color: red;
+}
+
+#text-input:focus{
+  outline: none;
+}

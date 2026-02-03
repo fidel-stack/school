@@ -86,4 +86,52 @@ function getTotalPages(catalog){
   return total;
 }
 
-console.log(getTotalPages(library))
+console.log(getTotalPages(library));
+
+//sample 2
+
+const books = [
+  {
+    title: "Angel's Game",
+    authorName: "Ruiz Zafon",
+    releaseYear: 2020
+  },
+
+  {
+    title: "Shadow of the Wind",
+    authorName: "Tuco Salamanca",
+    releaseYear: 2017
+  },
+
+  {
+    title: "The Cellar",
+    authorName: "Mike Whillers",
+    releaseYear: 1999
+  },
+
+  {
+    title: "My Fake Boyfriend",
+    authorName: "Skyler White",
+    releaseYear: 2005
+  }
+];
+
+function sortByYear(book1, book2){
+  if(book1.releaseYear < book2.releaseYear)
+  {
+    return -1;
+  }
+
+  if(book1.releaseYear > book2.releaseYear)
+  {
+    return 1;
+  }
+  return 0;
+}
+
+
+const filteredBooks = books.filter(book => book.releaseYear <= 2000);
+
+filteredBooks.sort(sortByYear);
+
+console.log(filteredBooks);
