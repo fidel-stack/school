@@ -1,0 +1,129 @@
+/* ---------- Theme variables ---------- */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1f2933;
+  --accent-color: #2563eb;
+  --surface-color: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#theme-switcher-button {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--accent-color);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  top: 2px;
+  left: 1px;
+}
+
+#theme-switcher-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+#theme-switcher-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent-color), white 40%);
+  outline-offset: 2px;
+}
+
+#theme-dropdown {
+  margin: 0;
+  padding: 0.25rem 0;
+  width: 160px;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.theme-header {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+
+#theme-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+}
+
+
+#theme-dropdown li {
+  list-style: none;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+#theme-dropdown li:hover,
+#theme-dropdown li:focus {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 85%);
+}
+
+
+#status {
+  min-height: 1.5rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+body.theme-light {
+  --bg-color: #ffffff;
+  --text-color: #1f2933;
+  --accent-color: #6366f1;
+  --surface-color: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.theme-dark {
+  --bg-color: #0f172a;
+  --text-color: #e5e7eb;
+  --accent-color: #38bdf8;
+  --surface-color: #020617;
+  --border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.theme-ocean {
+  --bg-color: #e0f2fe;
+  --text-color: #0c4a6e;
+  --accent-color: #0284c7;
+  --surface-color: #f0f9ff;
+  --border-color: rgba(2, 132, 199, 0.25);
+}
+
+body.theme-nord {
+  --bg-color: #2e3440;
+  --text-color: #eceff4;
+  --accent-color: #88c0d0;
+  --surface-color: #3b4252;
+  --border-color: rgba(236, 239, 244, 0.2);
+}
