@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --yellow: #debf6a;
+    --golden-yellow: #c5d1e0;
+    --dark-purple: #110815;
+    --light-grey: #efefef;
+}
+
+body {
+    background-color: var(--dark-purple);
+    color: var(--light-grey);
+    text-align: center;
+}
+
+.bg-information-container {
+    margin: 15px 0 25px;
+    font-size: 1.2rem;
+}
+
+.btn {
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+    color: var(--dark-purple);
+    background-color: var(--golden-yellow);
+    background-image: linear-gradient(#549bb9, #3370ff);
+    border-color: var(--golden-yellow);
+    border-radius: 10px;
+    border-width: 3px;
+}
+
+.btn:hover {
+    background-image: linear-gradient(#644cff, #1b8dba);
+}
