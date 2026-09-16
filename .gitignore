@@ -71,3 +71,9 @@ cpp/*
 !cpp/*.cxx
 !cpp/*.h
 !cpp/*.hpp
+# Local compiled school binaries
+/calculator
+/days
+/game
+/grade
+/space
