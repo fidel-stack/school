@@ -1,0 +1,73 @@
+# =========================
+# Python
+# =========================
+
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+myenv/
+myvenv/
+
+# =========================
+# C / C++
+# =========================
+
+# Compiled object files
+*.o
+*.obj
+
+# Executables / build output
+*.out
+*.exe
+
+# =========================
+# Java
+# =========================
+
+*.class
+out/
+target/
+
+# =========================
+# JavaScript / Node
+# =========================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Environment / secrets
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# =========================
+# VS Code
+# =========================
+
+.vscode/
+
+# =========================
+# OS generated files
+# =========================
+
+.DS_Store
+Thumbs.db
+# C/C++ compiled executables without extensions
+cpp/*
+!cpp/*.c
+!cpp/*.cpp
+!cpp/*.cc
+!cpp/*.cxx
+!cpp/*.h
+!cpp/*.hpp
