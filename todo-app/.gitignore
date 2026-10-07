@@ -1,0 +1,16 @@
+# Python
+_pycache_/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Freebuff metadata
+.freebuff/
