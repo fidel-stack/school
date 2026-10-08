@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>URL Shortener</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 40rem;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      line-height: 1.5;
+    }
+    h1 { font-size: 1.5rem; }
+    section {
+      border: 1px solid #8884;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    h2 { font-size: 1.1rem; margin-top: 0; }
+    label { display: block; margin-bottom: 0.25rem; font-weight: 600; }
+    input[type="url"], input[type="text"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #888;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 0.6rem;
+      padding: 0.5rem 1.25rem;
+      font-size: 1rem;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .message { margin-top: 0.75rem; }
+    .message:empty { display: none; }
+    .error { color: #c62828; font-weight: 600; }
+    .ok { color: #2e7d32; }
+    .muted { color: #777; }
+    .result-url { word-break: break-all; }
+    dl { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.75rem; margin: 0.75rem 0 0; }
+    dt { font-weight: 600; }
+    dd { margin: 0; word-break: break-all; }
+    a[target="_blank"]::after { content: " ↗"; }
+  </style>
+</head>
+<body>
+  <h1>URL Shortener</h1>
+
+  <section aria-labelledby="shorten-heading">
+    <h2 id="shorten-heading">Shorten a URL</h2>
+    <form id="shorten-form">
+      <label for="long-url">Long URL</label>
+      <input id="long-url" name="url" type="url"
+             placeholder="https://example.com/some/long/path" required>
+      <button type="submit">Shorten</button>
+    </form>
+    <div id="shorten-message" class="message" role="status" aria-live="polite"></div>
+  </section>
+
+  <section aria-labelledby="stats-heading">
+    <h2 id="stats-heading">Look up stats</h2>
+    <form id="stats-form">
+      <label for="short-code">Short code</label>
+      <input id="short-code" name="code" type="text"
+             placeholder="e.g. xfyKFO5" autocomplete="off" required>
+      <button type="submit">Get stats</button>
+    </form>
+    <div id="stats-message" class="message" role="status" aria-live="polite"></div>
+  </section>
+
+  <script>
+    "use strict";
+
+    var shortenForm = document.getElementById("shorten-form");
+    var shortenMessage = document.getElementById("shorten-message");
+    var statsForm = document.getElementById("stats-form");
+    var statsMessage = document.getElementById("stats-message");
+
+    // Every helper below builds nodes with createElement/textContent only.
+    // No innerHTML anywhere: API data is untrusted and must never be parsed
+    // as markup.
+    function clear(node) {
+      while (node.firstChild) {
+        node.removeChild(node.firstChild);
+      }
+    }
+
+    function line(parent, text, className) {
+      var p = document.createElement("p");
+      if (className) {
+        p.className = className;
+      }
+      p.textContent = text;
+      parent.appendChild(p);
+      return p;
+    }
+
+    // Extract {"error": "..."} from an API error body when possible.
+    function errorText(data, fallback) {
+      if (data && typeof data.error === "string" && data.error) {
+        return data.error;
+      }
+      return fallback;
+    }
+
+    // Read a non-2xx response: JSON body if the API sent one, else null.
+    async function readError(response) {
+      try {
+        return await response.json();
+      } catch (err) {
+        return null;
+      }
+    }
+
+    shortenForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      clear(shortenMessage);
+
+      var url = document.getElementById("long-url").value.trim();
+
+      var response;
+      try {
+        response = await fetch("/shorten", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: url })
+        });
+      } catch (err) {
+        line(shortenMessage, "Could not reach the server. Is it running?", "error");
+        return;
+      }
+
+      if (response.status === 201 || response.status === 200) {
+        var data;
+        try {
+          data = await response.json();
+        } catch (err) {
+          line(shortenMessage, "Server sent a malformed response.", "error");
+          return;
+        }
+        if (!data || typeof data.code !== "string" || !data.code) {
+          line(shortenMessage, "Server response was missing a short code.", "error");
+          return;
+        }
+
+        var shortUrl = window.location.origin + "/" + data.code;
+        var created = response.status === 201;
+
+        var p = document.createElement("p");
+        var label = document.createElement("span");
+        label.className = created ? "ok" : "muted";
+        label.textContent = created
+          ? "Newly created (201)."
+          : "Already existed (200) — this URL was shortened before.";
+        var sep = document.createTextNode(" ");
+        var link = document.createElement("a");
+        link.href = shortUrl;
+        link.textContent = shortUrl;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        p.appendChild(label);
+        p.appendChild(sep);
+        p.appendChild(link);
+        shortenMessage.appendChild(p);
+        return;
+      }
+
+      if (response.status === 400) {
+        var body = await readError(response);
+        line(shortenMessage, "Bad request (400): " + errorText(body, "invalid URL."), "error");
+        return;
+      }
+
+      var fallbackBody = await readError(response);
+      line(
+        shortenMessage,
+        "Unexpected error (" + response.status + "): " + errorText(fallbackBody, "try again."),
+        "error"
+      );
+    });
+
+    statsForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      clear(statsMessage);
+
+      var code = document.getElementById("short-code").value.trim();
+      var response;
+      try {
+        response = await fetch("/stats/" + encodeURIComponent(code));
+      } catch (err) {
+        line(statsMessage, "Could not reach the server. Is it running?", "error");
+        return;
+      }
+
+      if (response.status === 200) {
+        var data;
+        try {
+          data = await response.json();
+        } catch (err) {
+          line(statsMessage, "Server sent a malformed response.", "error");
+          return;
+        }
+
+        var dl = document.createElement("dl");
+
+        var dtUrl = document.createElement("dt");
+        dtUrl.textContent = "URL";
+        var ddUrl = document.createElement("dd");
+        ddUrl.textContent = data && typeof data.url === "string" ? data.url : "(missing)";
+
+        var dtClicks = document.createElement("dt");
+        dtClicks.textContent = "Clicks";
+        var ddClicks = document.createElement("dd");
+        ddClicks.textContent = data && typeof data.clicks === "number"
+          ? String(data.clicks)
+          : "(missing)";
+
+        dl.appendChild(dtUrl);
+        dl.appendChild(ddUrl);
+        dl.appendChild(dtClicks);
+        dl.appendChild(ddClicks);
+        statsMessage.appendChild(dl);
+        return;
+      }
+
+      if (response.status === 404) {
+        var body = await readError(response);
+        line(
+          statsMessage,
+          "Not found (404): " + errorText(body, "no short code named \"" + code + "\"."),
+          "error"
+        );
+        return;
+      }
+
+      var fallbackBody = await readError(response);
+      line(
+        statsMessage,
+        "Unexpected error (" + response.status + "): " + errorText(fallbackBody, "try again."),
+        "error"
+      );
+    });
+  </script>
+</body>
+</html>
